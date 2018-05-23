@@ -97,6 +97,9 @@ class Property:
         if 'items' in type_dict:
             if 'type' in type_dict['items']:
                 items = type_dict['items']['type']
+            elif type(type_dict['items']) is list:
+                items = resolve_ref(type_dict['items'][0]['$ref'])
+                ref_type = items
             else:
                 items = resolve_ref(type_dict['items']['$ref'])
                 ref_type = items
